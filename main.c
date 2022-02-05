@@ -8,6 +8,8 @@ t_philosopher *ft_lstnew(int num)
 	new = malloc(sizeof(t_philosopher));
 	new->num = num;
 	new->next = new;
+	new->n_meals = 0;
+	gettimeofday(&new->t_start, NULL);
 	return (new);
 }
 
@@ -47,6 +49,7 @@ void ft_args_init(t_program_args *args, char **argv)
 	args->t_die = atoi(argv[1]);
 	args->t_eat = atoi(argv[2]);
 	args->t_sleep = atoi(argv[3]);
+	gettimeofday(&args->t_now, NULL);
 	if (argv[4])
 		args->n_meals = atoi(argv[4]);
 	else
@@ -56,17 +59,17 @@ void ft_args_init(t_program_args *args, char **argv)
 int main(int argc, char **argv)
 {
 
-	// t_program_args *args;
-	// args = malloc(sizeof(t_program_args));
-	// if (argc >= 5 && argc <= 6)
-	// {
-	// 	// ft_args_init(args, &argv[1]);
-	// 	// printf("%d ", args->n_philo);
-	// 	// printf("%d ", args->t_die);
-	// 	// printf("%d ", args->t_eat);
-	// 	// printf("%d ", args->t_sleep);
-	// 	// printf("%d\n", args->n_meals);
-	// }
+	t_program_args *args;
+	args = malloc(sizeof(t_program_args));
+	if (argc >= 5 && argc <= 6)
+	{
+		ft_args_init(args, &argv[1]);
+		printf("%d ", args->n_philo);
+		printf("%d ", args->t_die);
+		printf("%d ", args->t_eat);
+		printf("%d ", args->t_sleep);
+		printf("%d\n", args->n_meals);
+	}
 	
 	t_philosopher *node;
 	t_philosopher *node1;
