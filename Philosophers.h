@@ -14,19 +14,25 @@ typedef struct s_program_args
 	int t_eat;
 	int t_sleep;
 	int n_meals;
-	// struct timeval t_now;
+	pthread_mutex_t write;
+	long t_now;
 
 }t_program_args;
 
 typedef struct s_philosopher
 {
-	// struct timeval t_start;
+	long t_start;
 	pthread_t threadId;
 	int id;
-	pthread_mutex_t *fork;
+	pthread_mutex_t fork;
 	int n_meals;
 	struct s_philosopher *next;
 	t_program_args  *args;
+	int 			iseating;
 }t_philosopher;
+
+long time_now(void);
+void	ft_usleep(long long sleep_time);
+void ft_write(t_philosopher *philo , char *msg, long long time);
 
 #endif
