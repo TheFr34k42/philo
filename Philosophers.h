@@ -5,6 +5,7 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <unistd.h>
 
 typedef struct s_program_args
 {
@@ -13,17 +14,19 @@ typedef struct s_program_args
 	int t_eat;
 	int t_sleep;
 	int n_meals;
-	struct timeval t_now;
+	// struct timeval t_now;
 
 }t_program_args;
 
 typedef struct s_philosopher
 {
-	struct timeval t_start;
-	int num;
-	pthread_mutex_t fork;
+	// struct timeval t_start;
+	pthread_t threadId;
+	int id;
+	pthread_mutex_t *fork;
 	int n_meals;
 	struct s_philosopher *next;
+	t_program_args  *args;
 }t_philosopher;
 
 #endif
