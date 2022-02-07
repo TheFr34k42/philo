@@ -6,7 +6,7 @@ The dining philosophers problem is invented by E. W. Dijkstra. Imagine that five
 </p>
 
 # Diagram
-I try to make diagram explain how to solve the problem with threads .
+I tried to make diagram to explain how to solve the problem with threads .
 
 ![alt text](https://github.com/BleedTheFreak/philo/blob/master/Screen%20Shot%202022-02-07%20at%204.20.38%20PM.png)
 
