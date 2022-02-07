@@ -6,7 +6,7 @@
 /*   By: ytaya <ytaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 17:12:51 by ytaya             #+#    #+#             */
-/*   Updated: 2022/02/07 16:25:26 by ytaya            ###   ########.fr       */
+/*   Updated: 2022/02/07 23:46:04 by ytaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_program_args
 	int				t_eat;
 	int				t_sleep;
 	int				n_meals;
-	long			t_start;
+	long			t_initphilo;
 	pthread_mutex_t	write;
 	int				stop;
 
@@ -47,7 +47,6 @@ typedef struct s_philosopher
 t_philosopher	*ft_lstnew(int id, t_program_args *args);
 t_philosopher	*ft_lstlast(t_philosopher *head);
 void			ft_args_init(t_program_args *args, char **argv);
-void			ft_end(void);
 void			ft_routine_manager(t_philosopher *philos);
 void			ft_sleep_ms(int time);
 void			ft_write(t_philosopher *philo, char *msg, long long time);

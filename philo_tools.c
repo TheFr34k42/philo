@@ -6,7 +6,7 @@
 /*   By: ytaya <ytaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 17:25:53 by ytaya             #+#    #+#             */
-/*   Updated: 2022/02/07 13:14:32 by ytaya            ###   ########.fr       */
+/*   Updated: 2022/02/07 23:53:27 by ytaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 void	ft_sleep_ms(int time)
 {
-	usleep(time * 1000);
+	long long	start;
+
+	start = ft_time_now();
+	usleep((time - 10) * 1000);
+	while ((ft_time_now() - time) < start)
+		;
 }
 
 void	ft_write(t_philosopher *philo, char *msg, long long time)
@@ -22,7 +27,7 @@ void	ft_write(t_philosopher *philo, char *msg, long long time)
 	if (philo->args->stop != 1)
 	{
 		pthread_mutex_lock(&philo->args->write);
-		printf("%lld philo %d %s", time - philo->args->t_start, philo->id, msg);
+		printf("%lld philo %d %s", time - philo->args->t_initphilo, philo->id, msg);
 		pthread_mutex_unlock(&philo->args->write);
 	}
 }
@@ -41,10 +46,10 @@ t_philosopher	*ft_philos_init(t_program_args *args)
 	int				j;
 	t_philosopher	*head;
 
-	args->t_start = ft_time_now();
 	j = 1;
 	i = args->n_philo;
 	head = ft_lstnew(j++, args);
+	head->t_lastmeal = args->t_initphilo;
 	while (j <= i)
 		ft_lstadd_back(&head, ft_lstnew(j++, args));
 	return (head);
@@ -58,8 +63,8 @@ void	ft_create_threads(t_philosopher *philos)
 	while (i--)
 	{
 		pthread_create(&philos->thread_id, NULL, &ft_routine, philos);
-		philos->t_lastmeal = philos->args->t_start;
-		philos = philos->next;
 		usleep(50);
+		philos = philos->next;
+		philos->t_lastmeal = philos->args->t_initphilo;
 	}
 }

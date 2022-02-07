@@ -6,7 +6,7 @@
 /*   By: ytaya <ytaya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 17:14:50 by ytaya             #+#    #+#             */
-/*   Updated: 2022/02/07 13:15:30 by ytaya            ###   ########.fr       */
+/*   Updated: 2022/02/07 23:45:31 by ytaya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	ft_lstadd_back(t_philosopher **lst, t_philosopher *new)
 			last = ft_lstlast(*lst);
 			last->next = new;
 			new->next = (*lst);
+			new->next = (*lst);
 		}
 	}
 	else
@@ -68,6 +69,7 @@ void	ft_args_init(t_program_args *args, char **argv)
 		args->n_meals = atoi(argv[4]);
 	else
 		args->n_meals = -1;
+	args->t_initphilo = ft_time_now();
 	pthread_mutex_init(&args->write, NULL);
 }
 
